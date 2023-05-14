@@ -25,11 +25,11 @@ public class DemoController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println("Principal: " + principal + "\n");
 
-        User userDetails = (User) authentication.getPrincipal();
-        System.out.println("User nome " + userDetails.getNome() + "\n");
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        System.out.println("Useraname " + userDetails.getUsername() + "\n");
 
         User usuario = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println("Usuario  " + userDetails.getNome());
+        System.out.println("Usuario  " + usuario.toString());
 
         return ResponseEntity.ok("hello from segured endpoint");
     }
