@@ -26,7 +26,7 @@ public class SecurityConfiguration {
                 .disable() // quando for usar varias sessoes  tira isso aqui
                 .authorizeHttpRequests()
                 .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
-                .requestMatchers("/api/v1/auth/**")
+                .requestMatchers("/api/v1/auth/**","/api/v1/recuperar/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
