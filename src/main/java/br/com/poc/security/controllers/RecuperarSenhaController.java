@@ -3,6 +3,8 @@ package br.com.poc.security.controllers;
 
 import br.com.poc.security.email.EmailService;
 import br.com.poc.security.email.LoginRequestDTO;
+import br.com.poc.security.email.MensagemResponseDTO;
+import br.com.poc.security.email.SenhasRequestDTO;
 import br.com.poc.security.user.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -32,9 +34,10 @@ public class RecuperarSenhaController {
         this.service.esqueciMinhaSenha(loginRequestDTO);
         return ResponseEntity.ok().build();
     }
-    @GetMapping
-    @Operation(summary = "Demo acesso para autenticados", description = "Endpoint DemoController, para acessar depois de autenticado")
-    public ResponseEntity<String> sayHello(Authentication authentication){
-        return ResponseEntity.ok("funcionou , porra");
+    @Operation(summary = "Nova senha", description = "Endpoint para inclusão da nova senha")
+    @PostMapping("/reset_password")
+    public ResponseEntity<MensagemResponseDTO> resetarSenha(@RequestParam String token,
+                                                            @RequestBody @Valid SenhasRequestDTO senhasRequestDTO) {
+        return ResponseEntity.ok(this.service.resetarSenha(token, senhasRequestDTO));
     }
 }
