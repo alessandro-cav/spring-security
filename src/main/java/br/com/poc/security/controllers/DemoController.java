@@ -1,7 +1,10 @@
-package br.com.poc.security.demo;
+package br.com.poc.security.controllers;
 
 
 import br.com.poc.security.user.User;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -14,9 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/demo-controller")
 @RequiredArgsConstructor
+
+@Tag(name = "Demo Controller", description = "APIs relacionadas ao demo controller")
+@SecurityRequirement(name = "bearerAuth")
 public class DemoController {
 
     @GetMapping
+    @Operation(summary = "Demo acesso para autenticados", description = "Endpoint DemoController, para acessar depois de autenticado")
     public ResponseEntity<String> sayHello(Authentication authentication){
 
         Object autenticacao = SecurityContextHolder.getContext().getAuthentication();
